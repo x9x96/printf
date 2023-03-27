@@ -1,5 +1,5 @@
 # Project Printf
-A team project by [Victoria Iria](https://github.com/EseVic) and I [@ALX SE](https://www.alxafrica.com)...
+A team project by [Victoria Iria](https://github.com/EseVic) and I [@ALX SE](https://www.alxafrica.com/software-engineering/)...
 
 ## Description
 ```_printf()``` is a build to replicate the functionality of the C programming function ```printf()```. 
