@@ -1,14 +1,15 @@
 #include "main.h"
 
+/************************* PRINT UNSIGNED NUMBER *************************/
 /**
- * print_unsigned - prints unsigned numbers
- * @types: arguments list
- * @buffer: buffer array to handle print
- * @flags: flags checker
- * @width: get width.
- * @precision: specifies precision
- * @size: size specifier
- * Return: prints characters
+ * print_unsigned - Prints an unsigned number
+ * @types: List of arguments
+ * @buffer: Buffer array to handle print
+ * @flags: Calculates active flags
+ * @width: get width
+ * @precision: Precision specification
+ * @size: Size specifier
+ * Return: Number of chars printed.
  */
 int print_unsigned(va_list types, char buffer[],
 	int flags, int width, int precision, int size)
@@ -34,19 +35,21 @@ int print_unsigned(va_list types, char buffer[],
 	return (write_unsgnd(0, n, buffer, flags, width, precision, size));
 }
 
+/************* PRINT UNSIGNED NUMBER IN OCTAL ****************/
 /**
  * print_octal - Prints an unsigned number in octal notation
- * @types: arguments list
- * @buffer: buffer array to handle print
- * @flags: flags checker
- * @width: get width.
- * @precision: specifies precision
- * @size: size specifier
- * Return: prints characters
+ * @types: List of arguments
+ * @buffer: Buffer array to handle print
+ * @flags: Calculates active flags
+ * @width: get width
+ * @precision: Precision specification
+ * @size: Size specifier
+ * Return: Number of chars printed
  */
 int print_octal(va_list types, char buffer[],
 	int flags, int width, int precision, int size)
 {
+
 	int n = BUFF_SIZE - 2;
 	unsigned long int num = va_arg(types, unsigned long int);
 	unsigned long int init_num = num;
@@ -65,22 +68,25 @@ int print_octal(va_list types, char buffer[],
 		buffer[n--] = (num % 8) + '0';
 		num /= 8;
 	}
+
 	if (flags & F_HASH && init_num != 0)
 		buffer[n--] = '0';
+
 	n++;
 
 	return (write_unsgnd(0, n, buffer, flags, width, precision, size));
 }
 
+/************** PRINT UNSIGNED NUMBER IN HEXADECIMAL **************/
 /**
- * print_hexadecimal - prints an unsigned number in hexadecimal format
- * @types: arguments list
- * @buffer: buffer array to handle print
- * @flags: flags checker
- * @width: get width.
- * @precision: specifies precision
- * @size: size specifier
- * Return: prints characters
+ * print_hexadecimal - Prints an unsigned number in hexadecimal notation
+ * @types: List of arguments
+ * @buffer: Buffer array to handle print
+ * @flags: Calculates active flags
+ * @width: get width
+ * @precision: Precision specification
+ * @size: Size specifier
+ * Return: Number of chars printed
  */
 int print_hexadecimal(va_list types, char buffer[],
 	int flags, int width, int precision, int size)
@@ -89,15 +95,16 @@ int print_hexadecimal(va_list types, char buffer[],
 		flags, 'x', width, precision, size));
 }
 
+/************* PRINT UNSIGNED NUMBER IN UPPER HEXADECIMAL **************/
 /**
- * print_hexa_upper - prints an unsigned number in upper hexadecimal notation
- * @types: arguments list
- * @buffer: buffer array to handle print
- * @flags: flags checker
- * @width: get width.
- * @precision: specifies precision
- * @size: size specifier
- * Return: prints characters
+ * print_hexa_upper - Prints an unsigned number in upper hexadecimal notation
+ * @types: List of arguments
+ * @buffer: Buffer array to handle print
+ * @flags: Calculates active flags
+ * @width: get width
+ * @precision: Precision specification
+ * @size: Size specifier
+ * Return: Number of chars printed
  */
 int print_hexa_upper(va_list types, char buffer[],
 	int flags, int width, int precision, int size)
@@ -106,6 +113,7 @@ int print_hexa_upper(va_list types, char buffer[],
 		flags, 'X', width, precision, size));
 }
 
+/************** PRINT HEXX NUM IN LOWER OR UPPER **************/
 /**
  * print_hexa - Prints a hexadecimal number in lower or upper
  * @types: List of arguments
@@ -146,6 +154,8 @@ int print_hexa(va_list types, char map_to[], char buffer[],
 		buffer[n--] = flag_ch;
 		buffer[n--] = '0';
 	}
+
 	n++;
+
 	return (write_unsgnd(0, n, buffer, flags, width, precision, size));
 }
