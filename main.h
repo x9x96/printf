@@ -103,7 +103,6 @@ int write_unsgnd(int is_negative, int ind,
 char buffer[],
 	int flags, int width, int precision, int size);
 
-/****************** MISC ******************/
 int print_checker(char);
 int append_hexa_code(char, char[], int);
 int is_digit(char);
