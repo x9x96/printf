@@ -1,15 +1,61 @@
 #include "main.h"
 
+/************************* WRITE HANDLE *************************/
+/**
+ * handle_write_char - Prints a string
+ * @c: char types.
+ * @buffer: Buffer array to handle print
+ * @flags: Calculates active flags.
+ * @width: get width.
+ * @precision: precision specifier
+ * @size: Size specifier
+ *
+ * Return: Number of chars printed.
+ */
+int handle_write_char(char c, char buffer[],
+	int flags, int width, int precision, int size)
+{ /* char is stored at left and paddind at buffer's right */
+	int i = 0;
+	char padd = ' ';
+
+	UNUSED(precision);
+	UNUSED(size);
+
+	if (flags & F_ZERO)
+		padd = '0';
+
+	buffer[i++] = c;
+	buffer[i] = '\0';
+
+	if (width > 1)
+	{
+		buffer[BUFF_SIZE - 1] = '\0';
+		for (i = 0; i < width - 1; i++)
+			buffer[BUFF_SIZE - i - 2] = padd;
+
+		if (flags & F_MINUS)
+			return (write(1, &buffer[0], 1) +
+					write(1, &buffer[BUFF_SIZE - i - 1], width - 1));
+		else
+			return (write(1, &buffer[BUFF_SIZE - i - 1], width - 1) +
+					write(1, &buffer[0], 1));
+	}
+
+	return (write(1, &buffer[0], 1));
+}
+
+/************************* WRITE NUMBER *************************/
 /**
  * write_number - Prints a string
- * @is_negative: arguments list
- * @ind: char type
- * @buffer: buffer array to handle print
- * @flags: flags checker
+ * @is_negative: Lista of arguments
+ * @ind: char types.
+ * @buffer: Buffer array to handle print
+ * @flags: Calculates active flags
  * @width: get width.
- * @precision: specifies precision
- * @size: size specifier
- * Return: prints characters
+ * @precision: precision specifier
+ * @size: Size specifier
+ *
+ * Return: Number of chars printed.
  */
 int write_number(int is_negative, int ind, char buffer[],
 	int flags, int width, int precision, int size)
@@ -42,6 +88,7 @@ int write_number(int is_negative, int ind, char buffer[],
  * @length: Number length
  * @padd: Pading char
  * @extra_c: Extra char
+ *
  * Return: Number of printed chars.
  */
 int write_num(int ind, char buffer[],
@@ -94,12 +141,13 @@ int write_num(int ind, char buffer[],
  * write_unsgnd - Writes an unsigned number
  * @is_negative: Number indicating if the num is negative
  * @ind: Index at which the number starts in the buffer
- * @buffer: buffer array to handle print
- * @flags: flags checker
- * @width: get width.
- * @precision: specifies precision
- * @size: size specifier
- * Return: prints characters
+ * @buffer: Array of chars
+ * @flags: Flags specifiers
+ * @width: Width specifier
+ * @precision: Precision specifier
+ * @size: Size specifier
+ *
+ * Return: Number of written chars.
  */
 int write_unsgnd(int is_negative, int ind,
 	char buffer[],
@@ -143,6 +191,7 @@ int write_unsgnd(int is_negative, int ind,
 			return (write(1, &buffer[0], i) + write(1, &buffer[ind], length));
 		}
 	}
+
 	return (write(1, &buffer[ind], length));
 }
 
@@ -156,6 +205,7 @@ int write_unsgnd(int is_negative, int ind,
  * @padd: Char representing the padding
  * @extra_c: Char representing extra char
  * @padd_start: Index at which padding should start
+ *
  * Return: Number of written chars.
  */
 int write_pointer(char buffer[], int ind, int length,
@@ -199,45 +249,4 @@ int write_pointer(char buffer[], int ind, int length,
 	if (extra_c)
 		buffer[--ind] = extra_c;
 	return (write(1, &buffer[ind], BUFF_SIZE - ind - 1));
-}
-
-/**
- * handle_write_char - prints string
- * @c: char
- * @buffer: buffer array to handle print
- * @flags: flags checker
- * @width: get width.
- * @precision: specifies precision
- * @size: size specifier
- * Return: prints characters
- */
-int handle_write_char(char c, char buffer[],
-	int flags, int width, int precision, int size)
-{ /* char is stored at left and paddind at buffer's right */
-	int i = 0;
-	char padd = ' ';
-
-	UNUSED(precision);
-	UNUSED(size);
-
-	if (flags & F_ZERO)
-		padd = '0';
-
-	buffer[i++] = c;
-	buffer[i] = '\0';
-
-	if (width > 1)
-	{
-		buffer[BUFF_SIZE - 1] = '\0';
-		for (i = 0; i < width - 1; i++)
-			buffer[BUFF_SIZE - i - 2] = padd;
-
-		if (flags & F_MINUS)
-			return (write(1, &buffer[0], 1) +
-					write(1, &buffer[BUFF_SIZE - i - 1], width - 1));
-		else
-			return (write(1, &buffer[BUFF_SIZE - i - 1], width - 1) +
-					write(1, &buffer[0], 1));
-	}
-	return (write(1, &buffer[0], 1));
 }
