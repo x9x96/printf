@@ -1,5 +1,3 @@
-/* Mirrored from "https://github.com/Joshua-Enrico/printf" by*/
-/*"Joshua-Enrico [20 Mar 2021]", 28 Mar 2023 22:49:32 GMT */
 #ifndef MAIN_H
 #define MAIN_H
 
@@ -20,6 +18,9 @@
 /* SIZES */
 #define S_LONG 2
 #define S_SHORT 1
+
+/* Mirrored from "https://github.com/Joshua-Enrico/printf" by*/
+/*"Joshua-Enrico [20 Mar 2021]", 28 Mar 2023 22:49:32 GMT */
 
 /**
  * struct fmt - Struct op
