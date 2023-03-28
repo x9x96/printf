@@ -22,7 +22,7 @@ The available specified convertions are:
 + Include the "main.h" header file on the functions using the _printf()
 
 ## Indemnification
-Attempts**s** were made to replicate the functionality of ```printf()``` but did not satisfy the requirement of some testcases.\
+Attempt**s** were made to replicate the functionality of ```printf()``` but did not satisfy the requirement of some testcases.\
 We admit ```_printf()``` custom build utilized in this project was traced to it's first occurance 
 + Enrico (2021) _printf [[Source code](https://github.com/Joshua-Enrico/printf)]
 
